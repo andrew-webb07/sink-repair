@@ -1,6 +1,22 @@
 {
-  "plumbers": [],
-  "completions": [],
+  "plumbers": [
+    {
+      "id": 1,
+      "name": "Maude"
+    },
+    {
+      "id": 2,
+      "name": "Merle"
+    }
+  ],
+  "completions": [
+    {
+      "requestId": "1",
+      "plumberId": "1",
+      "date_created": "2021-05-12",
+      "id": 1
+    }
+  ],
   "requests": [
     {
       "id": 1,
@@ -22,13 +38,6 @@
       "budget": "1200",
       "neededBy": "2021-05-15",
       "id": 3
-    },
-    {
-      "description": "clogged pipe",
-      "address": "21334",
-      "budget": "25",
-      "neededBy": "2021-05-24",
-      "id": 4
     }
   ]
 }
