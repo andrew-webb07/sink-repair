@@ -1,0 +1,10 @@
+.request__delete {
+    background-color: black;
+    color: white;
+}
+
+.request__list-items {
+    border: black solid .1em;
+    padding: .5em;
+    margin: .3em 0em;
+}

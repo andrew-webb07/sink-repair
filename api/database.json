@@ -11,32 +11,47 @@
   ],
   "completions": [
     {
-      "requestId": "1",
-      "plumberId": "1",
-      "date_created": "2021-05-12",
+      "requestId": 1,
+      "plumberId": 1,
+      "date_created": "5/14/2021",
       "id": 1
+    },
+    {
+      "requestId": 2,
+      "plumberId": 1,
+      "date_created": "5/15/2021",
+      "id": 2
+    },
+    {
+      "requestId": 3,
+      "plumberId": 2,
+      "date_created": "5/15/2021",
+      "id": 3
     }
   ],
   "requests": [
     {
-      "id": 1,
-      "description": "New sink sprayer needed",
-      "address": "34445 Bianka Ports",
-      "budget": 400,
-      "neededBy": "2021-08-27"
+      "description": "leaky faucet",
+      "address": "alfkj",
+      "budget": "500",
+      "neededBy": "2021-05-21",
+      "isComplete": true,
+      "id": 1
     },
     {
-      "id": 2,
-      "description": "Fix my toilet",
-      "address": "4111 Bramell",
-      "budget": 650,
-      "neededBy": "2021-09-18"
+      "description": "order 2",
+      "address": "alkasflkj 333`",
+      "budget": "2",
+      "neededBy": "2021-05-28",
+      "isComplete": true,
+      "id": 2
     },
     {
-      "description": "leaky pipe",
-      "address": "555 street",
-      "budget": "1200",
-      "neededBy": "2021-05-15",
+      "description": "Replace Shower head",
+      "address": "llllouddenslager!",
+      "budget": "25",
+      "neededBy": "2021-05-22",
+      "isComplete": true,
       "id": 3
     }
   ]

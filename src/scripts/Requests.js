@@ -1,4 +1,4 @@
-import { getRequests, deleteRequest, getPlumbers, saveCompletion } from "./dataAccess.js";
+import { getRequests, deleteRequest, getPlumbers, saveCompletion, requestIsComplete } from "./dataAccess.js";
 
 const mainContainer = document.querySelector("#container");
 
@@ -8,6 +8,8 @@ mainContainer.addEventListener("click", (click) => {
     deleteRequest(parseInt(requestId));
   }
 });
+
+
 
 mainContainer.addEventListener(
     "change",
@@ -21,11 +23,13 @@ mainContainer.addEventListener(
                    2. plumberId
                    3. date_created
             */
-           const newDate = new Date()
+        
+
+            const newDate = new Date()
             const completion = { 
-                requestId : requestId,
-                plumberId : plumberId,
-                date_created : newDate.toISOString().split("T")[0]
+                requestId : parseInt(requestId),
+                plumberId : parseInt(plumberId),
+                date_created : newDate.toLocaleDateString()
             }
 
             /*
@@ -34,17 +38,23 @@ mainContainer.addEventListener(
                 completion object as a parameter.
              */
             saveCompletion(completion)
+
+            requestIsComplete(parseInt(requestId))
+
         }
     }
 )
 
 export const Requests = () => {
-  const requests = getRequests();
-  const plumbers = getPlumbers();
+
+    const requests = getRequests();
+    const plumbers = getPlumbers();
+
+    const incompleteRequests = requests.filter(request => request.isComplete === false)
 
   let html = `
         <ul class="request">
-            ${requests.map((request) => {
+            ${incompleteRequests.map((request) => {
                 return `
                     <li class="request__list-items">${request.description}
 
@@ -55,13 +65,10 @@ export const Requests = () => {
                     }).join("")}
                     </select>
                     
-                    <button class="request__delete" id ="request--${request.id}">Delete</button>
+                    <button class="request__delete" id="request--${request.id}">Delete</button>
                     </li>
-                    `;
-              })
-              .join("")}
-        </ul>
-    `;
+                    `}).join("")}
+        </ul>`;
 
   return html;
 };

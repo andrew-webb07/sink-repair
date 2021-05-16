@@ -15,6 +15,7 @@ export const fetchRequests = () => {
             (serviceRequests) => {
                 // Store the external state in application state
                 applicationState.requests = serviceRequests
+                console.log(applicationState.requests)
             }
         )
 }
@@ -33,10 +34,22 @@ export const getPlumbers = () => {
     return [...applicationState.plumbers]
 }
 
+export const getCompletions = () => {
+    return [...applicationState.completions]
+}
+
 export const getRequests = () => {
-    const sortedRequestArray = [],
-    
-    return [...applicationState.requests]
+
+//     const completedRequest = applicationState.requests.map(request => {
+
+//         request.completed = !!applicationState.completions.find(completedOrder => completedOrder.requestId === request.id)
+//         return request
+//     }).sort((current, next) => {
+//         return current.completed - next.completed
+//     })
+
+//   return completedRequest
+return [...applicationState.requests]
 }
 
 export const sendRequest = (userServiceRequest) => {
@@ -47,7 +60,6 @@ export const sendRequest = (userServiceRequest) => {
         },
         body: JSON.stringify(userServiceRequest)
     }
-
 
     return fetch(`${API}/requests`, fetchOptions)
         .then(response => response.json())
@@ -66,7 +78,7 @@ export const deleteRequest = (id) => {
 }
 
 export const saveCompletion = (completionObject) => {
-    fetch(`${API}/completions`, {
+    return fetch(`${API}/completions`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -80,11 +92,25 @@ export const saveCompletion = (completionObject) => {
 }
 
 export const fetchCompletions = () => {
-    fetch(`${API}/completions`)
+    return fetch(`${API}/completions`)
     .then(response => response.json())
     .then(
         (completedOrders) => {
             applicationState.completions = completedOrders
         }
     )
+}
+
+export const requestIsComplete = (requestId) => {
+    return fetch(`${API}/requests/${requestId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({isComplete: true})
+    })
+    .then(response => response.json())
+    .then(() => {
+        mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+    })
 }
