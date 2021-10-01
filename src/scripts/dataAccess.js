@@ -4,7 +4,7 @@ const applicationState = {
     completions: []
 }
 
-const API = "http://localhost:8088"
+const API = "http://sink-repair-dev3.us-west-2.elasticbeanstalk.com/api"
 
 const mainContainer = document.querySelector("#container")
 
