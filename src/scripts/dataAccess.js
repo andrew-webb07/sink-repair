@@ -4,7 +4,7 @@ const applicationState = {
     completions: []
 }
 
-const API = "http://sink-repair-dev3.us-west-2.elasticbeanstalk.com/api"
+const API = "http://localhost:8088"
 
 const mainContainer = document.querySelector("#container")
 
@@ -15,7 +15,6 @@ export const fetchRequests = () => {
             (serviceRequests) => {
                 // Store the external state in application state
                 applicationState.requests = serviceRequests
-                console.log(applicationState.requests)
             }
         )
 }
@@ -39,17 +38,17 @@ export const getCompletions = () => {
 }
 
 export const getRequests = () => {
+    const copyRequestArray = [...applicationState.requests]
 
-//     const completedRequest = applicationState.requests.map(request => {
+    const completedRequests = copyRequestArray.map(request => {
+        request.completed = !!applicationState.completions.find(completedOrder => completedOrder.requestId === request.id)
+        return request
+    }).sort((current, next) => {return current.completed - next.completed})
 
-//         request.completed = !!applicationState.completions.find(completedOrder => completedOrder.requestId === request.id)
-//         return request
-//     }).sort((current, next) => {
-//         return current.completed - next.completed
-//     })
+    console.log(completedRequests)
 
-//   return completedRequest
-return [...applicationState.requests]
+  return completedRequests
+
 }
 
 export const sendRequest = (userServiceRequest) => {
